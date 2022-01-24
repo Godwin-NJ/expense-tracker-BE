@@ -1,0 +1,19 @@
+{
+  "name": "expense-tracker-be",
+  "version": "1.0.0",
+  "description": "expense tracker",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node app.js",
+    "start": "nodemon app.js"
+  },
+  "author": "godwin-amadi jnr",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^14.2.0",
+    "express": "^4.17.2",
+    "http-status-codes": "^2.2.0",
+    "mongoose": "^6.1.7",
+    "nodemon": "^2.0.15"
+  }
+}
