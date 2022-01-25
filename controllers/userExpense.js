@@ -10,6 +10,7 @@ const getAllEntry = async(req,res) => {
 const createEntry = async(req,res) => {
    
   const entry = await expenseUser.create({...req.body})
+  
 //   when expense already exist throw and error 
 //   if(req.body.title && req.body.date){
 //       throw new Error('expense already exist')

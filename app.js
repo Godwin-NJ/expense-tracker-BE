@@ -15,12 +15,14 @@ app.get('/', (req, res) => {
 
 // routers
 const userEntryRouter = require('./routes/userExpense')
+const userLogRouter = require('./routes/userLog')
 
 
 
 app.use(express.json())
 
 app.use('/api/v1/expense',userEntryRouter)
+app.use('/api/v1/user',userLogRouter)
 
 const port = process.env.PORT || 3000
 
