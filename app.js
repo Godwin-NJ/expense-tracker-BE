@@ -31,14 +31,18 @@ app.get('/', (req, res) => {
 })
 
 
+// middleware 
+const authentication = require('./middleware/auth')
+
+
 // routers
 const userEntryRouter = require('./routes/userExpense')
 const userLogRouter = require('./routes/userLog')
 
 
-// routes middleware
-app.use('/api/v1/expense',userEntryRouter)
+// routes
 app.use('/api/v1/user',userLogRouter)
+app.use('/api/v1/expense',authentication,userEntryRouter)
 
 const port = process.env.PORT || 5000
 

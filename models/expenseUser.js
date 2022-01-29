@@ -10,7 +10,7 @@ const userSchema = new Schema({
     },
     expenseType : {
         type: String,
-        enum : ['office supplies', 'Education & training', 'Feeding','Housing','transport'],
+        enum : ['office supplies', 'Education|training', 'Feeding','Housing','transport'],
         required: true
     },
 
