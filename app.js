@@ -43,6 +43,7 @@ const userLogRouter = require('./routes/userLog')
 // routes
 app.use('/api/v1/user',userLogRouter)
 app.use('/api/v1/expense',authentication,userEntryRouter)
+// app.use('/api/v1/expense',userEntryRouter)
 
 const port = process.env.PORT || 5000
 
