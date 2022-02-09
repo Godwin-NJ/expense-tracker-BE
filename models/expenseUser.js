@@ -20,7 +20,6 @@ const userSchema = new Schema({
     },
     date : {
         type : Date,
-        unique: true,
         required: true
     }
 })
