@@ -1,6 +1,6 @@
 const expenseUser = require('../models/expenseUser')
 const {StatusCodes} = require('http-status-codes');
-const res = require('express/lib/response');
+const {BadRequestError,NotFoundError} = require('../errors')
 
 const getAllEntry = async(req,res) => {
     const allExpense = await expenseUser.find({})
@@ -28,14 +28,14 @@ const updateEntry = async(req,res) => {
     } = req
 
     if(title === "" || expenseType === "" || amount === ""){
-        throw new Error('Data is empty, kindly fill')
+        throw new BadRequestError('title or expenseType or amount cannot be empty')
     }
     const updateExpense = await expenseUser.findOneAndUpdate({_id: expenseID}, req.body,{
         new : true, 
         runValidators: true
      })
      if(!updateExpense){
-         throw new Error('error updating specified id')
+         throw new NotFoundError(`No job with id: ${expenseID}`)
      }
      res.status(StatusCodes.OK).json({updateExpense})
 }
@@ -44,7 +44,7 @@ const deleteEntry = async(req,res) => {
     const { params : {id:expenseID}} = req
     const deleteExpense = await expenseUser.findByIdAndDelete({_id : expenseID})
         if(!deleteExpense){
-            throw new Error('id does not exist')
+            throw new NotFoundError(`id: ${expenseID} does not exist`)
         }
     res.status(StatusCodes.OK).json({deleteExpense})
 }

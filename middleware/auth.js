@@ -1,13 +1,11 @@
 const { StatusCodes } = require('http-status-codes');
 const jwt = require('jsonwebtoken');
-
-
-
+const {UnauthenticatedError} = require('../errors')
 
 const auth = async(req,res,next) => {
     const authUser = await req.headers.authorization;
-    if(!authUser && !authUser.startsWith("Bearer ")){
-       throw new Error('authUser  error')
+    if(!authUser || !authUser.startsWith("Bearer ")){
+       throw new UnauthenticatedError('Authentication Invalid')
     }
 
     const token = authUser.split(" ")[1]
