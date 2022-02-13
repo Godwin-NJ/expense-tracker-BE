@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express = require('express')
-
+require('express-async-errors');
 
 
 //  extra security features 
@@ -11,7 +11,7 @@ const rateLimit = require('express-rate-limit')
 
 // creating express server 
 const app = express()
-// feature middleware 
+// security middleware/ features
 app.set('trust proxy', 1);
 app.use(express.json())
 app.use(helmet())
@@ -33,6 +33,8 @@ app.get('/', (req, res) => {
 
 // middleware 
 const authentication = require('./middleware/auth')
+const errorHandlerMiddleware = require('./middleware/errorHandler')
+const notFoundMiddleware = require('./middleware/notFound')
 
 
 // routers
@@ -44,6 +46,10 @@ const userLogRouter = require('./routes/userLog')
 app.use('/api/v1/user',userLogRouter)
 app.use('/api/v1/expense',authentication,userEntryRouter)
 // app.use('/api/v1/expense',userEntryRouter)
+
+app.use(notFoundMiddleware)
+app.use(errorHandlerMiddleware)
+
 
 const port = process.env.PORT || 5000
 
